@@ -189,7 +189,7 @@ def generate_samples(
 
     X_ctrl = build_x_ctrl(ctrl_adata, _genes, cfg)
 
-    if normalize_counts is not None:
+    if normalize_counts is not None and normalize_counts is not False:
         all_samples *= normalize_counts
         all_truths *= normalize_counts
 
