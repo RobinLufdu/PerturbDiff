@@ -1,0 +1,33 @@
+# Downloaded datasets and model checkpoints
+data/
+checkpoints/
+
+# Experiment outputs and local logging
+runs/
+wandb/
+lightning_logs/
+outputs/
+multirun/
+
+# Python caches and build artifacts
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# HuggingFace / local caches
+.cache/
+*.lock
+
+# Environment and local machine files
+.env
+.venv/
+env/
+venv/
+*.log
+.DS_Store
