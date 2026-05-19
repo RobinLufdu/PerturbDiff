@@ -1,6 +1,13 @@
-# Downloaded datasets and model checkpoints
-/data/
-checkpoints/
+# Downloaded datasets, model checkpoints, and generated binary artifacts
+*.h5ad
+*.h5
+*.zst
+*.ckpt
+*.pt
+*.pth
+*.pkl
+*.npy
+*.npz
 
 # Experiment outputs and local logging
 runs/
