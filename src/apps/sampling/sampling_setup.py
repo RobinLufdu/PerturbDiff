@@ -6,6 +6,22 @@ from src.data import data_module
 from src.models.lightning.lightning_module import PlModel
 
 
+def _override_covariate_embedding_paths(cov_cfg, runtime_cov_cfg):
+    """Patch checkpoint covariate path fields with runtime config values."""
+    path_keys = [
+        "celltype_embedding_path",
+        "gene_embedding_path",
+        "pert_embedding_path",
+        "drug_embedding_path",
+        "replogle_gene_embedding_path",
+    ]
+    for key in path_keys:
+        val = runtime_cov_cfg.get(key, None)
+        if val is not None:
+            cov_cfg[key] = val
+    return cov_cfg
+
+
 def build_sampling_datamodule(cfg, logger):
     """
     Build sampling datamodule.
@@ -88,6 +104,10 @@ def load_sampling_model(cfg, logger, datamodule):
     # using the training setting
     needs_cov = needs_model = needs_opt = True
     hparams["cov_encoding_cfg"]["celltype_encoding"] = cfg.cov_encoding.celltype_encoding
+    hparams["cov_encoding_cfg"] = _override_covariate_embedding_paths(
+        hparams["cov_encoding_cfg"],
+        cfg.cov_encoding,
+    )
 
     model = PlModel.load_from_checkpoint(
         cfg.model_checkpoint_path,
